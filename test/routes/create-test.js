@@ -25,5 +25,15 @@ describe('Server path: /items/create', () => {
   afterEach(diconnectDatabase);
 
   // Write your describe blocks below:
+  describe('GET', () => {
+    it('renders empty input fields', async () => {
+      const response = await request(app)
+        .get('/items/create');
+      console.log('response.text: ', response.text);
+      assert.equal(parseTextFromHTML(response.text, `input#title-input`), '');
+      assert.equal(parseTextFromHTML(response.text, `input#imageUrl-input`), '');
+      assert.equal(parseTextFromHTML(response.text, `textarea#description-input`), '');
 
+    });
+  });
 });
