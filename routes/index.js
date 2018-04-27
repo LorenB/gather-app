@@ -8,7 +8,9 @@ router.get('/', async (req, res, next) => {
 });
 
 // Add additional routes below:
-
+router.get('/items/create', (req, res, next) => {
+  res.render('create');
+});
 
 
 module.exports = router;
