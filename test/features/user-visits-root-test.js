@@ -10,7 +10,7 @@ describe('User visits root', () => {
   describe('then visits create', () => {
     it('starts with empty input fields', () => {
       browser.url('/');
-      browser.click('a[href="create.html"]');
+      browser.click('a[href="/items/create"]');
     });
   });
 });

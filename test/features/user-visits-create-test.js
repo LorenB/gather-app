@@ -5,7 +5,7 @@ const {buildItemObject} = require('../test-utils');
 describe('User visits Create page', () => {
   describe('then enters data', () => {
     it('render the data entered', () => {
-      browser.url('/create.html');
+      browser.url('/items/create');
       const itemToCreate = buildItemObject();
       browser.setValue('#title-input', itemToCreate.title);
       browser.setValue('#description-input', itemToCreate.description);

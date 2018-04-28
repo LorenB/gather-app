@@ -20,6 +20,7 @@ const findImageElementBySource = (htmlAsString, src) => {
 describe('Server path: /items/create', () => {
   const itemToCreate = buildItemObject();
 
+
   beforeEach(connectDatabaseAndDropData);
 
   afterEach(diconnectDatabase);
@@ -29,11 +30,24 @@ describe('Server path: /items/create', () => {
     it('renders empty input fields', async () => {
       const response = await request(app)
         .get('/items/create');
-      console.log('response.text: ', response.text);
       assert.equal(parseTextFromHTML(response.text, `input#title-input`), '');
       assert.equal(parseTextFromHTML(response.text, `input#imageUrl-input`), '');
       assert.equal(parseTextFromHTML(response.text, `textarea#description-input`), '');
 
+    });
+  });
+  describe('POST', () => {
+
+    it('creates and renders new items', async () => {
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(itemToCreate);
+
+        assert.include(parseTextFromHTML(response.text, '.item-title'), itemToCreate.title);
+        const imageElement = findImageElementBySource(response.text, itemToCreate.imageUrl);
+        assert.equal(imageElement.src, itemToCreate.imageUrl);
+      assert.ok(true);
     });
   });
 });

@@ -12,5 +12,9 @@ router.get('/items/create', (req, res, next) => {
   res.render('create');
 });
 
+router.post('/items/create', async (req, res, next) => {
+  res.render('index', {items: [req.body]} );
+});
+
 
 module.exports = router;
