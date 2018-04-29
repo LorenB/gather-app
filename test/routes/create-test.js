@@ -47,5 +47,16 @@ describe('Server path: /items/create', () => {
       createdItem = await Item.findOne(itemToCreate);
       assert.isOk(createdItem);
     });
+
+    it('redirects to / when a new item is created', async () => {
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(itemToCreate);
+
+      assert.equal(response.status, 302);
+      assert.equal(response.headers.location, '/');
+      
+    });
   });
 });
