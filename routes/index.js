@@ -13,6 +13,7 @@ router.get('/items/create', (req, res, next) => {
 });
 
 router.post('/items/create', async (req, res, next) => {
+  // TODO: fix - stop rasing UnhandledPromiseRejectionWarning
   await Item.create(req.body);
   res.redirect('/');
 });

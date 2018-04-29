@@ -55,8 +55,23 @@ describe('Server path: /items/create', () => {
         .send(itemToCreate);
 
       assert.equal(response.status, 302);
-      assert.equal(response.headers.location, '/');
-      
+       assert.equal(response.headers.location, '/');
+    });
+
+    it('displays an error when empty title is passed', async () => {
+      const itemToCreateWithError = {
+        description: itemToCreate.description,
+        imageUrl: itemToCreate.imageUrl
+      };
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(itemToCreateWithError);
+      const items = await Item.find({});
+      assert.equal(items.length, 0);
+      assert.equal(response.status, 400);
+      assert.include(parseTextFromHTML(response.body), 'required');
+
     });
   });
 });
