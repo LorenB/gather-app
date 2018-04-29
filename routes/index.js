@@ -14,8 +14,19 @@ router.get('/items/create', (req, res, next) => {
 
 router.post('/items/create', async (req, res, next) => {
   // TODO: fix - stop rasing UnhandledPromiseRejectionWarning
-  await Item.create(req.body);
-  res.redirect('/');
+  const title = req.body.title;
+  const description = req.body.description;
+  const imageUrl= req.body.imageUrl;
+  const newItem = new Item({title, description, imageUrl});
+  const error = newItem.validateSync();
+  if(newItem.errors) {
+    res
+      .status(400)
+      .render('create', {newItem: newItem});
+  } else {
+    await newItem.save();
+    res.redirect('/');
+  }
 });
 
 

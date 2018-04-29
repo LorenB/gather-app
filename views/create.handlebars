@@ -28,6 +28,9 @@
           <form class="input-form" action="../items/create" method="post" >
             <!-- Add your form elements here -->
             <input type="text" name="title" id="title-input">
+            {{#with newItem.errors.title as |error|}}
+              <span class="error">{{error.message}}</span>
+            {{/with}}
             <textarea name="description" id="description-input"></textarea>
             <input type="text" name="imageUrl" id="imageUrl-input">
             <button id="submit-button" type="submit">

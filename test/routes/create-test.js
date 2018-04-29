@@ -70,8 +70,7 @@ describe('Server path: /items/create', () => {
       const items = await Item.find({});
       assert.equal(items.length, 0);
       assert.equal(response.status, 400);
-      assert.include(parseTextFromHTML(response.body), 'required');
-
+      assert.include(parseTextFromHTML(response.text, '.error'), 'required');
     });
   });
 });
