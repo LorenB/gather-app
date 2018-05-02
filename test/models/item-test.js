@@ -25,7 +25,6 @@ describe('Model: Item', () => {
     });
 
     it('is required', async () => {
-      const titleInvlid = 0;
       const item = await new Item({
         description: 'something',
         imageUrl: 'http://example.com/image.jpeg'
@@ -37,7 +36,7 @@ describe('Model: Item', () => {
   });
 
   describe('#descrition', () => {
-    it('is a string', async () => {
+    it('is a String', async () => {
       const descriptionInvalid = 0;
       const item = await new Item({
         description: descriptionInvalid,
@@ -48,7 +47,6 @@ describe('Model: Item', () => {
     });
 
     it('is required', async () => {
-      const titleInvlid = 0;
       const item = await new Item({
         title: 'something',
         imageUrl: 'http://example.com/image.jpeg'
@@ -56,6 +54,29 @@ describe('Model: Item', () => {
 
       const error = item.validateSync();
       assert.equal(error.errors.description.message, 'Path `description` is required.');
+    });
+  });
+
+  describe('#imageUrl', () => {
+    it('is a String', async () => {
+      const imageUrlInvalid = 0;
+      const item = await new Item({
+        imageUrl: imageUrlInvalid,
+        title: 'something',
+        description: 'blah'
+      });
+
+      assert.strictEqual(item.imageUrl, imageUrlInvalid.toString() );
+    });
+
+    it('is required', async () => {
+      const item = await new Item({
+        title: 'something',
+        description: 'blah'
+      });
+
+      const error = item.validateSync();
+      assert.equal(error.errors.imageUrl.message, 'Path `imageUrl` is required.');
     });
   });
 });
