@@ -32,6 +32,9 @@
               <span class="error">{{error.message}}</span>
             {{/with}}
             <textarea name="description" id="description-input">{{newItem.description}}</textarea>
+            {{#with newItem.errors.description as |error|}}
+              <span class="error">{{error.message}}</span>
+            {{/with}}
             <input type="text" name="imageUrl" id="imageUrl-input" value="{{newItem.imageUrl}}">
             <button id="submit-button" type="submit">
               <p>Submit</p>
