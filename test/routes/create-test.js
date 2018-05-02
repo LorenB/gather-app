@@ -72,5 +72,20 @@ describe('Server path: /items/create', () => {
       assert.equal(response.status, 400);
       assert.include(parseTextFromHTML(response.text, '.error'), 'required');
     });
+
+    it('displays an error when empty description is passed', async () => {
+      const itemToCreateWithError = {
+        imageUrl: itemToCreate.imageUrl,
+        title: itemToCreate.title
+      };
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(itemToCreateWithError);
+      const items = await Item.find({});
+      assert.equal(items.length, 0);
+      assert.equal(response.status, 400);
+      assert.include(parseTextFromHTML(response.text, '.error'), 'required');
+    });
   });
 });
