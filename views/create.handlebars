@@ -36,6 +36,9 @@
               <span class="error">{{error.message}}</span>
             {{/with}}
             <input type="text" name="imageUrl" id="imageUrl-input" value="{{newItem.imageUrl}}">
+            {{#with newItem.errors.imageUrl as |error|}}
+              <span class="error">{{error.message}}</span>
+            {{/with}}
             <button id="submit-button" type="submit">
               <p>Submit</p>
             </button>
