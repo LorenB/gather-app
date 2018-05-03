@@ -29,5 +29,12 @@ router.post('/items/create', async (req, res, next) => {
   }
 });
 
+router.get('/items/:itemId', async (req, res, next) => {
+  console.log('handling /items/:itemId');
+  var item = await Item.findById(req.params.itemId);
+  console.log('item', item._id);
+  res.render('item', {item});
+});
+
 
 module.exports = router;
