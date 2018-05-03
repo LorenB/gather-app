@@ -13,6 +13,8 @@ describe('User visits Single Item page', () => {
       browser.click('#submit-button');
       browser.click('.item-card a');
       assert.include(browser.getText('body'), itemToCreate.description);
+      assert.include(browser.getText('body'), itemToCreate.title);
+      assert.include(browser.getAttribute('body img', 'src'), itemToCreate.imageUrl);
 
     });
   });
