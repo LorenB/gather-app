@@ -22,7 +22,7 @@ router.post('/items/create', async (req, res) => {
   if(newItem.errors) {
     res
       .status(400)
-      .render('create', {newItem: newItem});
+      .render('create', {newItem});
   } else {
     await newItem.save();
     res.redirect('/');
