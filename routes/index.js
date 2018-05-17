@@ -12,7 +12,7 @@ router.get('/items/create', (req, res, next) => {
   res.render('create');
 });
 
-router.post('/items/create', async (req, res, next) => {
+router.post('/items/create', async (req, res) => {
   // TODO: fix - stop rasing UnhandledPromiseRejectionWarning
   const title = req.body.title;
   const description = req.body.description;
